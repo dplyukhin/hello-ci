@@ -1,0 +1,20 @@
+name: CI
+on:
+  - push
+  - workflow_dispatch
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Say hello
+        run: echo "Greetings from $GITHUB_SHA"
+
+      - name: Test file
+        run: test -f greeting.txt
+
+      - name: Impossible
+        run: echo "You shouldn't see this"
