@@ -14,7 +14,12 @@ jobs:
         run: echo "Greetings from $GITHUB_SHA"
 
       - name: Test file
-        run: test -f greeting.txt
+        run: |
+            if [ ! -f greeting.txt ]; then
+              echo "::error::greeting.txt is missing."
+              exit 1
+            fi
+            echo "Found greeting.txt" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Impossible
         run: echo "You shouldn't see this"
